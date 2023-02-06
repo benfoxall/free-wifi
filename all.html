@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Free Wifi!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Free Wifi</h1>
+
+    <h2>/system</h2>
+    <pre id="system"></pre>
+
+    <h2>/user</h2>
+    <pre id="user"></pre>
+
+    <h2>/position</h2>
+    <pre id="position"></pre>
+
+    <h2>/users</h2>
+    <pre id="users"></pre>
+
+    <script type="module">
+      import { jsonp } from "./util.js";
+
+      jsonp(`https://www.ombord.info/api/jsonp/system`).then(
+        (resp) => (system.innerText = JSON.stringify(resp, null, 2))
+      );
+
+      jsonp(`https://www.ombord.info/api/jsonp/user`).then(
+        (resp) => (user.innerText = JSON.stringify(resp, null, 2))
+      );
+
+      jsonp(`https://www.ombord.info/api/jsonp/position`).then(
+        (resp) => (position.innerText = JSON.stringify(resp, null, 2))
+      );
+
+      jsonp(`https://www.ombord.info/api/jsonp/users`).then(
+        (resp) => (users.innerText = JSON.stringify(resp, null, 2))
+      );
+    </script>
+  </body>
+</html>

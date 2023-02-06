@@ -1,0 +1,17 @@
+body {
+  background-color: #ccc;
+  color: #000;
+  font-family: sans-serif;
+}
+h1,
+h2,
+h3 {
+  font-weight: 100;
+}
+output {
+  font-size: 15vw;
+  background: aquamarine;
+  
+}
+
+a{color: #08f}

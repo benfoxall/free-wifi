@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>Free Wifi!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Free Wifi</h1>
+
+    <h2>How fast is this train going?</h2>
+
+    <output id="speed">🤷‍♀️</output>
+
+    <p>
+      <a href="all.html">all data</a>
+    </p>
+
+    <script type="module">
+      import { poll, jsonp, km } from "./util.js";
+
+      poll(async () => {
+        const result = await jsonp(
+          `https://www.ombord.info/api/jsonp/position`
+        );
+
+        try {
+          speed.innerText = km.format(result.speed * 3.6);
+        } catch (e) {
+          speed.innerText = "🤷‍♀️";
+        }
+      });
+    </script>
+  </body>
+</html>

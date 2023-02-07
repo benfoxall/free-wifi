@@ -11,11 +11,17 @@
     <output id="speed">🤷‍♀️</output>
 
     <p>
+      <a id="down" href="#" download="🗺.json">🗺</a>
+    </p>
+
+    <p>
       <a href="all.html">all data</a>
     </p>
 
     <script type="module">
       import { poll, jsonp, km } from "./util.js";
+
+      const points = (window.points = []);
 
       poll(async () => {
         const result = await jsonp(
@@ -24,9 +30,36 @@
 
         try {
           speed.innerText = km.format(result.speed * 3.6);
+
+          points.push([result.longitude, result.latitude]);
         } catch (e) {
           speed.innerText = "🤷‍♀️";
         }
+      });
+
+      document.querySelector("#down").addEventListener("click", (e) => {
+        const json = {
+          type: "FeatureCollection",
+          features: [
+            {
+              type: "Feature",
+              properties: {},
+              geometry: {
+                coordinates: points,
+                type: "LineString",
+              },
+            },
+          ],
+        };
+
+        const blob = new Blob([JSON.stringify(json, null, 2)], {
+          type: "application/json",
+        });
+        const url = URL.createObjectURL(blob);
+
+        e.target.href = url;
+
+        // document.querySelector("#down")
       });
     </script>
   </body>
